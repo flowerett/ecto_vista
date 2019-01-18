@@ -1,6 +1,8 @@
 # EctoVista
 
-PG Views support for Ecto
+PG Views support for Ecto.
+
+Inspired by [scenic](https://github.com/scenic-views/scenic) library for Rails
 
 ## Installation
 
@@ -28,6 +30,20 @@ end
 iex> Catalog.refresh
 {:ok, :success}
 ```
+
+## Roadmap
+
+### M1
+
+- [ ] Support `Model.refresh` callback in Ecto.Schema for Materialized Views
+- [ ] Support `create view` callback in Ecto.Migration
+
+### M2
+
+- [ ] Support all options for refresh and create views
+- [ ] Implement automatic view versioning
+
+## Docs
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
