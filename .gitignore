@@ -1,0 +1,9 @@
+/_build
+/cover
+/deps
+/doc
+/.fetch
+/tmp
+erl_crash.dump
+*.ez
+ecto_vista-*.tar
