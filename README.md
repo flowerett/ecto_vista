@@ -35,7 +35,7 @@ iex> Catalog.refresh
 
 ### M1
 
-- [ ] Support `Model.refresh` callback in Ecto.Schema for Materialized Views
+- [x] Support `Model.refresh` callback in Ecto.Schema for Materialized Views
 - [ ] Support `create view` callback in Ecto.Migration
 
 ### M2
