@@ -1,9 +1,5 @@
 sudo: false
 language: elixir
-elixir:
-  - 1.8.0
-otp_release:
-  - 21.2
 matrix:
   include:
   - otp_release: 18.3
@@ -14,12 +10,16 @@ matrix:
     elixir: 1.6.6
   - otp_release: 20.3
     elixir: 1.7.4
+  - otp_release: 21.2
+    elixir: 1.8.0
 addons:
-  postgresql: "9.3"
+  postgresql: "9.4"
 install:
   - mix local.rebar --force
   - mix local.hex --force
   - mix deps.get
 script:
-  - "mix format --check-formatted --dry-run"
-  - "mix test"
+  - if [[ `elixir -v` = *"1.4.5"* ]] || [[ `elixir -v` = *"1.5.3"* ]]; then echo "mix format not supported"; else mix format --check-formatted --dry-run; fi
+  - mix test
+after_script:
+  - if [[ `elixir -v` = *"1.8.0"* ]]; then MIX_ENV=docs mix do deps.get, inch.report; fi

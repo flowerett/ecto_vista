@@ -2,9 +2,11 @@
 
 # EctoVista
 
-PG Views support for Ecto.
+![Landscape](https://pp.userapi.com/c1111/u5935491/11475271/x_d17f8ffd.jpg)
 
-Inspired by [scenic](https://github.com/scenic-views/scenic) library for Rails
+Useful methods to define and manage PostgreSQL views in Ecto.
+
+Inspired by [scenic](https://github.com/scenic-views/scenic) library for ActiveRecord (RoR)
 
 ## Installation
 
@@ -31,8 +33,8 @@ def deps do
 end
 ```
 
-2. Generate your migration for the view, put a view definition like the one below
-inside a `change` or a `up` method:
+2. Generate your migration for the view, put the view definition like the one below
+inside `change` or `up` method:
 
 ```
 execute("""
@@ -64,7 +66,7 @@ def App.Catalog do
 end
 ```
 
-If you need to update a view, generate a new migration and then just update the version number in the schema definition:
+If you need to update the view, generate a new migration and then just update the version number in the schema definition:
 
 ```
 def App.Catalog do
@@ -76,6 +78,7 @@ def App.Catalog do
 
   ...
 end
+```
 
 4. Don't forget to refresh your materialized view to see data:
 
@@ -93,8 +96,8 @@ iex> Catalog.refresh
 - [ ] Support `create view` callback in Ecto.Migration
 
 ### M2
-- [ ] Support all options for refresh and create views
-- [ ] Implement automatic view versioning for a migration
+- [ ] Support all options to refresh and create views
+- [ ] Implement automatic view versioning for migration
 
 ## Docs
 
