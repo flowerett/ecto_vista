@@ -34,7 +34,10 @@ defmodule EctoVista.MixProject do
       {:ecto, "~> 3.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:inch_ex, ">= 0.0.0", only: :docs}
+
+      # Docs dependencies
+      {:ex_doc, "~> 0.19.1", only: :docs},
+      {:inch_ex, "~> 0.2", only: :docs}
     ]
   end
 

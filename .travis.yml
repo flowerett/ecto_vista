@@ -22,5 +22,5 @@ script:
   - if [[ `elixir -v` = *"1.4.5"* ]] || [[ `elixir -v` = *"1.5.3"* ]]; then echo "mix format not supported"; else mix format --check-formatted --dry-run; fi
   - mix test
 after_script:
-  - MIX_ENV=docs mix deps.get
+  - cd $TRAVIS_BUILD_DIR
   - MIX_ENV=docs mix inch.report
