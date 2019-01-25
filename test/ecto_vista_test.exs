@@ -35,6 +35,7 @@ defmodule EctoVistaTest do
 
   defmodule Catalog do
     use Ecto.Schema
+
     use EctoVista,
       repo: TestRepo,
       table_name: "catalog",
@@ -69,6 +70,7 @@ defmodule EctoVistaTest do
   test "it handles table name version" do
     defmodule Foo do
       use Ecto.Schema
+
       use EctoVista,
         repo: TestRepo,
         table_name: "foo",

@@ -6,18 +6,18 @@ defmodule EctoVista do
   defmacro __using__(opts \\ []) do
     unless repo = Keyword.get(opts, :repo) do
       raise ArgumentError,
-        """
-        expected :repo to be given as an option. Example:
-        use EctoVista, repo: App.Repo
-        """
+            """
+            expected :repo to be given as an option. Example:
+            use EctoVista, repo: App.Repo
+            """
     end
 
     unless table_name = Keyword.get(opts, :table_name) do
       raise ArgumentError,
-        """
-        expected :table_name to be given as an option. Example:
-        use EctoVista, table_name: "categories"
-        """
+            """
+            expected :table_name to be given as an option. Example:
+            use EctoVista, table_name: "categories"
+            """
     end
 
     version = Keyword.get(opts, :version, 1)
