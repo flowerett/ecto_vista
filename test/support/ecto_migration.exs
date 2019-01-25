@@ -12,7 +12,7 @@ defmodule Ecto.Integration.Migration do
     end
 
     execute("""
-    CREATE MATERIALIZED VIEW catalog AS
+    CREATE MATERIALIZED VIEW catalog_v1 AS
       SELECT c.*, count(p.id) AS product_count
       FROM categories c
       LEFT JOIN products p ON c.id = p.category_id
@@ -22,7 +22,7 @@ defmodule Ecto.Integration.Migration do
   end
 
   def down do
-    execute("DROP MATERIALIZED VIEW IF EXISTS catalog;")
+    execute("DROP MATERIALIZED VIEW IF EXISTS catalog_v1;")
 
     drop(table(:products))
 

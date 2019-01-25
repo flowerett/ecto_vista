@@ -35,9 +35,12 @@ defmodule EctoVistaTest do
 
   defmodule Catalog do
     use Ecto.Schema
-    use EctoVista, repo: TestRepo
+    use EctoVista,
+      repo: TestRepo,
+      table_name: "catalog",
+      version: 1
 
-    schema "catalog" do
+    schema @table_name do
       field(:name, :string)
       field(:product_count, :integer)
     end
@@ -60,12 +63,27 @@ defmodule EctoVistaTest do
   end
 
   test "it returns view source" do
-    assert Catalog.source() == "catalog"
+    assert Catalog.source() == "catalog_v1"
+  end
+
+  test "it handles table name version" do
+    defmodule Foo do
+      use Ecto.Schema
+      use EctoVista,
+        repo: TestRepo,
+        table_name: "foo",
+        version: 2
+
+      schema @table_name do
+      end
+    end
+
+    assert Foo.source() == "foo_v2"
   end
 
   test "it refreshes materialized view", %{category: category} do
     refute TestRepo.one(Catalog)
-    assert {:ok, :success} = Catalog.refresh()
+    assert :ok = Catalog.refresh()
 
     assert %Catalog{id: category_id, name: category_name, product_count: 1} =
              TestRepo.one(Catalog)

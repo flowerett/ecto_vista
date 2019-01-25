@@ -19,16 +19,67 @@ end
 
 ## Basic Usage
 
+1. Add `ecto_vista` to your list of dependencies in `mix.exs`:
+
+```
+def deps do
+  ...
+  {:ecto_vista, "~ 0.1"}
+  ...
+end
+```
+
+2. Generate your migration for the view, put a view definition like the one below
+inside a `change` or a `up` method:
+
+```
+execute("""
+  CREATE MATERIALIZED VIEW catalog_v1 AS
+    SELECT c.*, count(p.id) AS product_count
+    FROM categories c
+    LEFT JOIN products p ON c.id = p.category_id
+    GROUP BY c.id
+  ;
+""")
+```
+
+Mention that you need to add `v[versionNumber]` to the table name.
+This naming convention facilitates 0-downtime view updates and will be handled automagically in future versions.
+
+3. Use `EctoVista` module in your Ecto schema:
+
 ```
 def App.Catalog do
   use Ecto.Schema
-  use EctoVista, repo: App.Repo
+  use EctoVista,
+    repo: App.Repo
+    table_name: "catalog"
 
-  # schema definitions
+  schema @table_name do
+    field(:name, :string)
+    field(:product_count, :integer)
+  end
+end
+```
+
+If you need to update a view, generate a new migration and then just update the version number in the schema definition:
+
+```
+def App.Catalog do
+  use Ecto.Schema
+  use EctoVista,
+    repo: App.Repo
+    table_name: "catalog"
+    version: 2
+
+  ...
 end
 
+4. Don't forget to refresh your materialized view to see data:
+
+```
 iex> Catalog.refresh
-{:ok, :success}
+:ok
 ```
 
 ## Roadmap
@@ -36,12 +87,12 @@ iex> Catalog.refresh
 ### M1
 
 - [x] Support `Model.refresh` callback in Ecto.Schema for Materialized Views
+- [x] Implement automatic view versioning for a model
 - [ ] Support `create view` callback in Ecto.Migration
 
 ### M2
-
 - [ ] Support all options for refresh and create views
-- [ ] Implement automatic view versioning
+- [ ] Implement automatic view versioning for a migration
 
 ## Docs
 
