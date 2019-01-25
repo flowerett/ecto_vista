@@ -22,4 +22,5 @@ script:
   - if [[ `elixir -v` = *"1.4.5"* ]] || [[ `elixir -v` = *"1.5.3"* ]]; then echo "mix format not supported"; else mix format --check-formatted --dry-run; fi
   - mix test
 after_script:
-  - if [[ `elixir -v` = *"1.8.0"* ]]; then MIX_ENV=docs mix do deps.get, inch.report; fi
+  - MIX_ENV=docs mix deps.get
+  - MIX_ENV=docs mix inch.report
