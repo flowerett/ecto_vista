@@ -1,13 +1,9 @@
-sudo: false
+os: linux
+dist: xenial
 language: elixir
-matrix:
+
+jobs:
   include:
-  - otp_release: 18.3
-    elixir: 1.4.5
-  - otp_release: 19.3
-    elixir: 1.5.3
-  - otp_release: 20.3
-    elixir: 1.6.6
   - otp_release: 20.3
     elixir: 1.7.4
   - otp_release: 21.3
@@ -26,7 +22,7 @@ install:
   - mix local.hex --force
   - mix deps.get
 script:
-  - if [[ `elixir -v` = *"1.4.5"* ]] || [[ `elixir -v` = *"1.5.3"* ]]; then echo "mix format not supported"; else mix format --check-formatted --dry-run; fi
+  - mix lint
   - mix test
 after_script:
   - cd $TRAVIS_BUILD_DIR

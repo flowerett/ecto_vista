@@ -10,6 +10,7 @@ defmodule EctoVista.MixProject do
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      aliases: aliases(),
 
       # Hex
       description: "PG Views support for Ecto",
@@ -17,6 +18,8 @@ defmodule EctoVista.MixProject do
 
       # Docs
       name: "Ecto.Vista",
+      source_url: "https://github.com/flowerett/ecto_vista",
+      homepage_url: "https://github.com/flowerett/ecto_vista",
       docs: docs()
     ]
   end
@@ -25,6 +28,16 @@ defmodule EctoVista.MixProject do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  def aliases do
+    [
+      lint: [
+        "hex.audit",
+        "deps.unlock --unused",
+        "format --check-formatted --dry-run"
+      ]
     ]
   end
 
