@@ -11,6 +11,10 @@ defmodule EctoVista.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       aliases: aliases(),
+      dialyzer: [
+        plt_add_deps: :apps_direct,
+        plt_add_apps: ~w(compiler iex ex_unit mix)a
+      ],
 
       # Hex
       description: "PG Views support for Ecto",
@@ -37,7 +41,8 @@ defmodule EctoVista.MixProject do
         "hex.audit",
         "deps.unlock --unused",
         "format --check-formatted --dry-run",
-        "credo --strict"
+        "credo --strict",
+        "dialyzer"
       ]
     ]
   end
@@ -51,6 +56,7 @@ defmodule EctoVista.MixProject do
 
       # Dev dependencies
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
 
       # Docs dependencies
       {:ex_doc, "~> 0.23", only: :docs},
