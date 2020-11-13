@@ -59,8 +59,8 @@ defmodule EctoVista.MixProject do
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
 
       # Docs dependencies
-      {:ex_doc, "~> 0.23", only: :docs},
-      {:inch_ex, "~> 2.0", only: :docs}
+      {:ex_doc, "~> 0.23", only: :dev, runtime: false},
+      {:inch_ex, "~> 2.0", only: :dev, runtime: false}
     ]
   end
 
