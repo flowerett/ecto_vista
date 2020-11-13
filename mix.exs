@@ -36,7 +36,8 @@ defmodule EctoVista.MixProject do
       lint: [
         "hex.audit",
         "deps.unlock --unused",
-        "format --check-formatted --dry-run"
+        "format --check-formatted --dry-run",
+        "credo --strict"
       ]
     ]
   end
@@ -47,6 +48,9 @@ defmodule EctoVista.MixProject do
       {:ecto, "~> 3.5"},
       {:ecto_sql, "~> 3.5"},
       {:postgrex, "~> 0.15"},
+
+      # Dev dependencies
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
 
       # Docs dependencies
       {:ex_doc, "~> 0.23", only: :docs},
