@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/flowerett/ecto_vista.svg?branch=master)](https://travis-ci.org/flowerett/ecto_vista)
+# EctoVista - PostgreSQL views for Ecto
 
-# EctoVista
+![Elixir CI](https://github.com/flowerett/ecto_vista/workflows/Elixir%20CI/badge.svg)
 
 ![Landscape](https://pp.userapi.com/c1111/u5935491/11475271/x_d17f8ffd.jpg)
 
@@ -23,14 +23,10 @@ end
 
 ## Basic Usage
 
-1. Add `ecto_vista` to your list of dependencies in `mix.exs`:
+1. Add `ecto_vista` to your list of dependencies in `mix.exs` and run:
 
 ```
-def deps do
-  ...
-  {:ecto_vista, "~ 0.2"}
-  ...
-end
+mix deps.get
 ```
 
 2. Generate your migration for the view, put the view definition like the one below
