@@ -56,7 +56,7 @@ defmodule EctoVista.MixProject do
 
       # Dev dependencies
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
 
       # Docs dependencies
       {:ex_doc, "~> 0.23", only: :docs},
