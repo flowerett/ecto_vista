@@ -2,6 +2,7 @@ defmodule EctoVistaTest do
   use ExUnit.Case, async: true
   doctest EctoVista
 
+  alias Ecto.Adapters.SQL.Sandbox
   alias Ecto.Integration.TestRepo
 
   defmodule Category do
@@ -48,7 +49,7 @@ defmodule EctoVistaTest do
   end
 
   setup do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(TestRepo)
+    :ok = Sandbox.checkout(TestRepo)
 
     {:ok, category} =
       %Category{}
@@ -91,6 +92,6 @@ defmodule EctoVistaTest do
              TestRepo.one(Catalog)
 
     assert category_id == category.id
-    assert category_name == category_name
+    assert category_name == category.name
   end
 end
