@@ -16,7 +16,7 @@ by adding `ecto_vista` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ecto_vista, "~> 0.1.0"}
+    {:ecto_vista, "~> 0.2.0"}
   ]
 end
 ```
@@ -28,7 +28,7 @@ end
 ```
 def deps do
   ...
-  {:ecto_vista, "~ 0.1"}
+  {:ecto_vista, "~ 0.2"}
   ...
 end
 ```

@@ -1,13 +1,13 @@
 defmodule EctoVista.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.2.0"
 
   def project do
     [
       app: :ecto_vista,
       version: @version,
-      elixir: "~> 1.4",
+      elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
 
@@ -31,13 +31,13 @@ defmodule EctoVista.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ecto, "~> 3.0"},
-      {:ecto_sql, "~> 3.0"},
-      {:postgrex, ">= 0.0.0"},
+      {:ecto, "~> 3.5"},
+      {:ecto_sql, "~> 3.5"},
+      {:postgrex, "~> 0.15"},
 
       # Docs dependencies
-      {:ex_doc, "~> 0.19.1", only: :docs},
-      {:inch_ex, "~> 0.2", only: :docs}
+      {:ex_doc, "~> 0.23", only: :docs},
+      {:inch_ex, "~> 2.0", only: :docs}
     ]
   end
 
