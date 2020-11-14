@@ -1,6 +1,7 @@
 defmodule EctoVista.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/flowerett/ecto_vista"
   @version "0.2.0"
 
   def project do
@@ -22,13 +23,11 @@ defmodule EctoVista.MixProject do
 
       # Docs
       name: "EctoVista",
-      source_url: "https://github.com/flowerett/ecto_vista",
-      homepage_url: "https://github.com/flowerett/ecto_vista",
+      homepage_url: @source_url,
       docs: docs()
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger]
@@ -47,7 +46,6 @@ defmodule EctoVista.MixProject do
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
       {:ecto, "~> 3.5"},
@@ -59,7 +57,7 @@ defmodule EctoVista.MixProject do
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
 
       # Docs dependencies
-      {:ex_doc, "~> 0.23", only: :dev, runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:inch_ex, "~> 2.0", only: :dev, runtime: false}
     ]
   end
@@ -68,16 +66,16 @@ defmodule EctoVista.MixProject do
     [
       maintainers: ["Nick Chernyshev"],
       licenses: ["Apache 2.0"],
-      links: %{"GitHub" => "https://github.com/flowerett/ecto_vista"},
+      links: %{"GitHub" => @source_url},
       files: ~w(.formatter.exs mix.exs README.md lib)
     ]
   end
 
   defp docs do
     [
-      main: "EctoVista",
-      extras: ["README.md"],
-      source_url: "https://github.com/flowerett/ecto_vista"
+      main: "readme",
+      source_url: @source_url,
+      extras: ["README.md"]
     ]
   end
 end
