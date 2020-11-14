@@ -21,7 +21,7 @@ defmodule EctoVista.MixProject do
       package: package(),
 
       # Docs
-      name: "Ecto.Vista",
+      name: "EctoVista",
       source_url: "https://github.com/flowerett/ecto_vista",
       homepage_url: "https://github.com/flowerett/ecto_vista",
       docs: docs()
