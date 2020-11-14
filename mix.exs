@@ -75,7 +75,8 @@ defmodule EctoVista.MixProject do
 
   defp docs do
     [
-      main: "Ecto.Vista",
+      main: "EctoVista",
+      extras: ["README.md"],
       source_url: "https://github.com/flowerett/ecto_vista"
     ]
   end

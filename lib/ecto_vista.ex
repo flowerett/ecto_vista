@@ -1,5 +1,67 @@
 defmodule EctoVista do
-  @moduledoc false
+  @moduledoc """
+  Provides the macros and functions to define and manage
+  PostgreSQL views with Ecto.
+
+  ## Using EctoVista
+
+    To use `EctoVista`, you need to add `use EctoVista` to your Elixir
+    files. This gives you access to the functions and macros defined
+    in the module.
+
+    example:
+      def App.Catalog do
+        use Ecto.Schema
+        use EctoVista,
+          repo: App.Repo
+          table_name: "catalog"
+
+        schema @table_name do
+          field(:name, :string)
+          field(:product_count, :integer)
+        end
+      end
+
+    The `@table_name` will be defined in macro as `{table_name}_v{version}` (version is 1 by default)
+    This naming convention facilitates 0-downtime view updates and will be handled automagically in future versions.
+
+    ## Generating Views
+
+      Views can be generated via regular migration, just put the definition inside `change` or `up` migration methods.
+      For the schema definition like the one above, view can be generated as:
+
+      execute(\"\"\"
+        CREATE MATERIALIZED VIEW catalog_v1 AS
+          SELECT c.*, count(p.id) AS product_count
+          FROM categories c
+          LEFT JOIN products p ON c.id = p.category_id
+          GROUP BY c.id
+        ;
+      \"\"\")
+
+
+  ## Updating Views
+
+    If you need to update the view, generate a new migration and then just update the version number in the schema definition:
+
+      def App.Catalog do
+        use Ecto.Schema
+        use EctoVista,
+          repo: App.Repo
+          table_name: "catalog"
+          version: 2
+
+        ...
+      end
+
+  ## Refreshing Views
+
+    Use the `refresh/0` function
+    It will run `REFRESH MATERIALIZED VIEW [view_name];` query.
+
+      iex> Catalog.refresh
+      :ok
+  """
 
   require Ecto.Query
 
@@ -31,6 +93,14 @@ defmodule EctoVista do
 
       def source, do: __MODULE__.__struct__().__meta__.source
 
+      @doc """
+      A function that refreshes a current version of the view,
+      defined in module.
+      Currently support only materialized views.
+
+        iex> Catalog.refresh
+        :ok
+      """
       @spec refresh() :: :ok | {:error, String.t()}
       def refresh do
         @table_name

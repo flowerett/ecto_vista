@@ -43,9 +43,6 @@ execute("""
 """)
 ```
 
-Mention that you need to add `v[versionNumber]` to the table name.
-This naming convention facilitates 0-downtime view updates and will be handled automagically in future versions.
-
 3. Use `EctoVista` module in your Ecto schema:
 
 ```
@@ -61,6 +58,9 @@ def App.Catalog do
   end
 end
 ```
+
+The `@table_name` will be defined in macro as `{table_name}_v{version}` (version is 1 by default)
+This naming convention facilitates 0-downtime view updates and will be handled automagically in future versions.
 
 If you need to update the view, generate a new migration and then just update the version number in the schema definition:
 
