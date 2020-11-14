@@ -1,6 +1,5 @@
 defmodule EctoVistaTest do
   use ExUnit.Case, async: true
-  doctest EctoVista
 
   alias Ecto.Adapters.SQL.Sandbox
   alias Ecto.Integration.TestRepo
