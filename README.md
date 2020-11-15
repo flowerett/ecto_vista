@@ -4,7 +4,7 @@
 [![Module Version](https://img.shields.io/hexpm/v/ecto_vista.svg)](https://hex.pm/packages/ecto_vista)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ecto_vista/)
 [![Total Download](https://img.shields.io/hexpm/dt/ecto_vista.svg)](https://hex.pm/packages/ecto_vista)
-[![License](https://img.shields.io/hexpm/l/ecto_vista.svg)](https://github.com/yyy/ecto_vista/blob/master/LICENSE)
+[![License](https://img.shields.io/hexpm/l/ecto_vista.svg)](https://github.com/flowerett/ecto_vista/blob/master/LICENSE.md)
 [![Last Updated](https://img.shields.io/github/last-commit/flowerett/ecto_vista.svg)](https://github.com/flowerett/ecto_vista/commits/master)
 
 ![Landscape](https://pp.userapi.com/c1111/u5935491/11475271/x_d17f8ffd.jpg)
@@ -104,4 +104,4 @@ inside `change` or `up` method:
 ## License
 
 The source code is under the Apache 2 License.
-Copyright (c) 2019- Nick Chernyshev.
+Copyright ©2019 Nikolai Chernyshev
