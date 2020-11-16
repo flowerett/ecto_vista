@@ -15,7 +15,7 @@ Inspired by [scenic](https://github.com/scenic-views/scenic) library for ActiveR
 
 ## Installation
 
-Add `ecto_vista` to your list of dependencies in `mix.exs`:
+Add `:ecto_vista` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -25,69 +25,76 @@ def deps do
 end
 ```
 
-## Basic Usage
+<!-- MDOC !-->
 
-1. Add `ecto_vista` to your list of dependencies in `mix.exs` and run:
+## Using EctoVista
 
-   ```
-   mix deps.get
-   ```
+To use `EctoVista`, you need to add `use EctoVista` to your Elixir files. This
+gives you access to the functions and macros defined in the module.
 
-2. Generate your migration for the view, put the view definition like the one below
-inside `change` or `up` method:
+```elixir
+def App.Catalog do
+  use Ecto.Schema
+  use EctoVista,
+    repo: App.Repo
+    table_name: "catalog"
 
-   ```
-   execute("""
-     CREATE MATERIALIZED VIEW catalog_v1 AS
-       SELECT c.*, count(p.id) AS product_count
-       FROM categories c
-       LEFT JOIN products p ON c.id = p.category_id
-       GROUP BY c.id
-     ;
-   """)
-   ```
+  schema @table_name do
+    field(:name, :string)
+    field(:product_count, :integer)
+  end
+end
+```
 
-3. Use `EctoVista` module in your Ecto schema:
+The `@table_name` will be defined in macro as `{table_name}_v{version}`
+(version is 1 by default) This naming convention facilitates 0-downtime view
+updates and will be handled automagically in future versions.
 
-   ```
-   def App.Catalog do
-     use Ecto.Schema
-     use EctoVista,
-       repo: App.Repo
-       table_name: "catalog"
+## Generating Views
 
-     schema @table_name do
-       field(:name, :string)
-       field(:product_count, :integer)
-     end
-   end
-   ```
+Views can be generated via regular migration, just put the definition inside
+`change` or `up` migration methods.
 
-   The `@table_name` will be defined in macro as `{table_name}_v{version}`
-   (version is 1 by default). This naming convention facilitates 0-downtime view
-   updates and will be handled automagically in future versions.
+For the schema definition like the one above, view can be generated as:
 
-   If you need to update the view, generate a new migration and then just
-   update the version number in the schema definition:
+```elixir
+execute(\"\"\"
+  CREATE MATERIALIZED VIEW catalog_v1 AS
+    SELECT c.*, count(p.id) AS product_count
+    FROM categories c
+    LEFT JOIN products p ON c.id = p.category_id
+    GROUP BY c.id
+  ;
+\"\"\")
+```
 
-   ```
-   def App.Catalog do
-     use Ecto.Schema
-     use EctoVista,
-       repo: App.Repo
-       table_name: "catalog"
-       version: 2
+## Updating Views
 
-     ...
-   end
-   ```
+If you need to update the view, generate a new migration and then just update
+the version number in the schema definition:
 
-4. Don't forget to refresh your materialized view to see data:
+```elixir
+def App.Catalog do
+  use Ecto.Schema
+  use EctoVista,
+    repo: App.Repo
+    table_name: "catalog"
+    version: 2
 
-   ```
-   iex> Catalog.refresh
-   :ok
-   ```
+  ...
+end
+```
+
+## Refreshing Views
+
+Use the `refresh/0` function. It will run `REFRESH MATERIALIZED VIEW
+[view_name];` query.
+
+```elixir
+iex> Catalog.refresh
+:ok
+```
+<!-- MDOC !-->
 
 ## Roadmap
 

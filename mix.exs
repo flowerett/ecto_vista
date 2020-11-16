@@ -73,7 +73,7 @@ defmodule EctoVista.MixProject do
 
   defp docs do
     [
-      main: "readme",
+      main: "EctoVista",
       source_url: @source_url,
       extras: ["README.md"]
     ]
