@@ -1,17 +1,7 @@
 defmodule EctoVista do
-  @external_resource readme = "README.md"
-
   @moduledoc """
   Provides the macros and functions to define and manage
   PostgreSQL views with Ecto.
-
-  #{
-    readme
-    |> File.read!()
-    |> String.split("<!-- MDOC !-->")
-    |> Enum.fetch!(1)
-  }
-
   """
 
   require Ecto.Query

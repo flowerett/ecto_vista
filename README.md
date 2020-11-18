@@ -25,8 +25,6 @@ def deps do
 end
 ```
 
-<!-- MDOC !-->
-
 ## Using EctoVista
 
 To use `EctoVista`, you need to add `use EctoVista` to your Elixir files. This
@@ -94,7 +92,6 @@ Use the `refresh/0` function. It will run `REFRESH MATERIALIZED VIEW
 iex> Catalog.refresh
 :ok
 ```
-<!-- MDOC !-->
 
 ## Roadmap
 

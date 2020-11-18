@@ -23,6 +23,7 @@ defmodule EctoVista.MixProject do
 
       # Docs
       name: "EctoVista",
+      source_url: @source_url,
       homepage_url: @source_url,
       docs: docs()
     ]
@@ -73,8 +74,8 @@ defmodule EctoVista.MixProject do
 
   defp docs do
     [
-      main: "EctoVista",
-      source_url: @source_url,
+      main: "readme",
+      api_reference: false,
       extras: ["README.md"]
     ]
   end
